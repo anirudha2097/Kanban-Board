@@ -1,0 +1,46 @@
+nav{
+
+    background-color: rgb(255, 255, 255);
+    padding: 5px 40px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #00887a;
+
+    > div:nth-child(2){
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+
+        >input{
+            border: none;
+            outline: none;
+            width: 65%;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #00887a12;
+            font-size: 0.9rem;
+            color: #00887a;
+
+            &:focus{
+                border: none;
+                outline: none;
+            }
+        }
+
+        >button{
+            border: 0;
+            padding: 11px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            background-color: #00887a;
+            color: rgb(255, 255, 255);
+            >svg{
+                margin-right: 5px;
+            }
+        }
+    }
+}
