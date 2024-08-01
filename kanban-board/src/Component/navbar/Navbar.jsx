@@ -1,8 +1,8 @@
 import React from 'react'
-import "./Navbar.css"
+import "./Navbar.scss"
 import { FaPlus } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({onCreateTaskClick}) => {
 
   return (
     <nav>
@@ -12,7 +12,7 @@ const Navbar = () => {
       <div>
         <input type="text" placeholder="Search" />
        
-        <button><FaPlus/> Create Task</button>
+        <button onClick={onCreateTaskClick}><FaPlus/> Create Task</button>
       </div>
     </nav>
   )

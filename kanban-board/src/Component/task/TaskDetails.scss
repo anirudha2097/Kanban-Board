@@ -1,0 +1,98 @@
+$clr: #00887a;
+
+.task{
+    position: fixed;
+    inset: 0px;
+    background-color: rgba(0, 0, 0, 0.303);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: 2s;
+    transition: 2s;
+
+    >div{
+        width: 600px;
+        // padding: 30px;
+        // border: 1px solid black;
+        // display: flex;
+        // align-items: center;
+
+
+        >button{
+            float: inline-end;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            padding: 0%;
+            margin: 0%;
+            cursor: pointer;
+
+            >svg{
+                margin-right: 8px;
+                // margin-bottom: 20px;
+                color: white;
+                font-size: 2rem;
+
+            }
+        }
+    }
+}
+
+.form{
+    margin: 40px 0 0 0;
+    padding: 0 0 30px;
+    // border: 1px solid goldenrod;  
+    border-radius: 15px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid red;
+    
+    >label{
+        margin: 15px 0 0 15px;
+        font-weight: 600;
+
+    }
+    
+    >input, textarea{
+        border-radius: 5px;
+        padding: 12px 20px;
+        border: none;
+        margin: 10px;
+        font-size: 1.1rem;
+        font-weight: 400;
+        background-color: #00887a12;
+
+        &:focus{
+            border: none;
+            outline: none;
+        }
+    }
+
+    >textarea{
+        min-height: 100px;
+    }
+    >button{
+        // width: 30%;
+        margin: auto;
+        margin-top: 25px;
+        padding: 12px 35px;
+        border-radius: 5px;
+        border: none;
+        font-size: 1.1rem;
+        background-color: $clr;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+    }
+}
