@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './TaskDetails.scss'
 import { CgClose } from "react-icons/cg";
 
@@ -17,6 +17,10 @@ const TaskDetails = ({onClose}) => {
     setDescription("");
   }
 
+  useEffect(()=>{
+    localStorage.setItem("kanban", JSON.stringify(tasks));
+  }, [tasks])
+
   return (
     <div className='task'>
         <div>
@@ -28,7 +32,7 @@ const TaskDetails = ({onClose}) => {
                     <input type="text" placeholder='Title' value={title} onChange={(e)=> setTitle(e.target.value)}/>
 
                     {/* <label htmlFor="">Description</label> */}
-                    <textarea name="" id="" placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <textarea placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)} />
 
                     <button type='submit'>Create</button>
                 </form>
