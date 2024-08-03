@@ -7,4 +7,8 @@ body{
   // background-color: rgba(241, 241, 241, 0.759);
   margin: 0%;
   padding: 0%;
+
+  &::-webkit-scrollbar{
+    display: none;
+}
 }

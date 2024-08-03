@@ -1,6 +1,6 @@
 $clr: #00887a;
 
-.task{
+.taskForm{
     position: fixed;
     inset: 0px;
     background-color: rgba(0, 0, 0, 0.303);
@@ -42,7 +42,7 @@ $clr: #00887a;
     }
 }
 
-.form{
+.formContainer{
     margin: 40px 0 0 0;
     padding: 0 0 30px;
     // border: 1px solid goldenrod;  

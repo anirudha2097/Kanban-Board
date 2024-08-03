@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import './TaskDetails.scss'
+import './TaskForm.scss'
 import { CgClose } from "react-icons/cg";
 
-const TaskDetails = ({onClose}) => {
+const TaskForm = ({onClose}) => {
 
-  const initialArr = localStorage.getItem("kanban")?JSON.parse(localStorage.getItem("kanban")):[];
+  const initialArr = localStorage.getItem("toDoTasks")?JSON.parse(localStorage.getItem("toDoTasks")):[];
   const [tasks, setTasks] = useState(initialArr);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -18,20 +18,18 @@ const TaskDetails = ({onClose}) => {
   }
 
   useEffect(()=>{
-    localStorage.setItem("kanban", JSON.stringify(tasks));
+    localStorage.setItem("toDoTasks", JSON.stringify(tasks));
   }, [tasks])
 
   return (
-    <div className='task'>
+    <div className='taskForm'>
         <div>
             <button onClick={onClose}><CgClose/></button>
-            <div className='form'>
+            <div className='formContainer'>
                 <h1>Create Task</h1>
                 <form onSubmit={addTask}>
-                    {/* <label htmlFor="">Title</label> */}
                     <input type="text" placeholder='Title' value={title} onChange={(e)=> setTitle(e.target.value)}/>
 
-                    {/* <label htmlFor="">Description</label> */}
                     <textarea placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)} />
 
                     <button type='submit'>Create</button>
@@ -43,4 +41,4 @@ const TaskDetails = ({onClose}) => {
   )
 }
 
-export default TaskDetails
+export default TaskForm
