@@ -1,7 +1,7 @@
 import './App.scss';
 import Navbar from './Component/navbar/Navbar';
 import Home from './Component/home/Home';
-import Task from './Component/task/TaskDetails';
+import TaskForm from './Component/task/TaskForm';
 import { useState } from 'react';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     <>
       <Navbar onCreateTaskClick = {()=> setCreateTask(true)} />
       <Home/>
-      {createTask && <Task onClose={()=> setCreateTask(false)} />}
+      {createTask && <TaskForm onClose={()=> setCreateTask(false)} />}
     </>
   );
 }

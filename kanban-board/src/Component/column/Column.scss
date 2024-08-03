@@ -1,0 +1,39 @@
+.column{
+    // border: 1px solid blue;
+    // min-height: 80vh;
+    // max-height: 78vh;
+    border-radius: 10px;
+    // background-color: white;
+    // background-color: rgba(231, 245, 254, 0.573);
+    background-color: #c8e8e430;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 10px;
+    
+    // -ms-overflow-style: none;
+    // scrollbar-width: none;
+
+    >div>h4{
+        text-align: center;
+        font-size: 1.05rem;
+        // background-color: greenyellow;
+        position:static;
+        border-radius: 5px;
+        margin: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 1px 4px;
+        width: fit-content;
+    }
+
+    >div:nth-child(2){
+        max-height: 73vh;
+        margin-bottom: 7px;
+        border-radius: 15px;
+        // background-color: red;
+        overflow-y: scroll;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+
+}
+

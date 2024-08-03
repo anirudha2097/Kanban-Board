@@ -1,0 +1,27 @@
+.task{
+    // border: 1px solid black;
+    border-radius: 3px;
+    margin: 8px;
+    padding: 5px 15px;
+    // color: rgb(93, 93, 93);
+    color: #01534a;
+    // background-color: #00887a12;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: grab;
+    >h4{
+        margin: 0%;
+        margin-top: 10px;
+    }
+    >p{
+        margin: 0%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    &:active{
+        opacity: 0.9;
+        background-color: aqua;
+        border: 1px solid gray;
+    }
+
+}

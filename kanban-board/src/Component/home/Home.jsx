@@ -1,29 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "./Home.scss";
+import { DragDropContext } from 'react-beautiful-dnd';
+import Column from '../column/Column';
 
 
 
-// const taskArr = [{
-    //     "title": "task 1",
-    //     "description": "task 1 description"
-    // }, 
-// {
-//     "title": "task 2",
-//     "description": "task 2 description"
-// }, 
-// {
-    //     "title": "task 3",
-    //     "description": "task 3 description"
-// }, 
-// {
-//     "title": "task 4",
-//     "description": "task 4 description"
-// }, 
-// {
-//     "title": "task 5",
-//     "description": "task 5 description"
-// },  
-// ]
 
 // const Column = ({arr=[]}) => (
 //     <div>
@@ -39,44 +20,113 @@ import "./Home.scss";
 
 const Home = () => {
 
-    const taskArr = localStorage.getItem("kanban")?JSON.parse(localStorage.getItem("kanban")):[];
+    const toDoTask = localStorage.getItem("toDoTasks")?JSON.parse(localStorage.getItem("toDoTasks")):[];
 
-    const [activeCard, setActiveCard] = useState(null);
+    const [toDoTasks, setToDoTasks] = useState(toDoTask);
+
+    const [inProgressTasks, setInProgressTasks] = useState(localStorage.getItem("inProgressTasks")?JSON.parse(localStorage.getItem("inProgressTasks")):[]);
+
+    const [peerReviewTasks, setPeerReviewTasks] = useState(localStorage.getItem("peerReviewTasks")?JSON.parse(localStorage.getItem("peerReviewTasks")):[]);
+    
+    const [doneTasks, setDoneTasks] = useState(localStorage.getItem("doneTasks")?JSON.parse(localStorage.getItem("doneTasks")):[]);
+
+    // const [activeCard, setActiveCard] = useState(null);
 
     useEffect(()=>{
-        localStorage.setItem("kanban", JSON.stringify(taskArr));
-      }, [taskArr])
-    
-    //   onDragStart={()=>setActiveCard(index)} onDragEnd={()=>setActiveCard(null)}
-    const TaskDetail = ({title, description, index, setActiveCard}) => (
-        <div className='tasks' draggable onDragEnter ={() => setActiveCard(index)} onDragExit ={() => setActiveCard(null)}>
-            <h4>{title}</h4>
-            <p>{description}</p>
-        </div>
-    )    
+        localStorage.setItem("toDoTasks", JSON.stringify(toDoTasks));
+    }, [toDoTasks])
 
-    // console.log(activeCard);
+    // console.log(toDoTasks);
+    // useEffect(()=>{
+    //     localStorage.setItem("toDoTasks", JSON.stringify(toDoTasks));
+    // }, [toDoTasks])
+
+    useEffect(()=>{
+        localStorage.setItem("inProgressTasks", JSON.stringify(inProgressTasks));
+    }, [inProgressTasks])
+
+    useEffect(()=>{
+        localStorage.setItem("peerReviewTasks", JSON.stringify(peerReviewTasks));
+    }, [peerReviewTasks])  
+
+    useEffect(()=>{
+        localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+    }, [doneTasks])
+    
+
+    const handleDragEnd = (result) =>{
+
+        const {destination, source, draggableId} = result;
+
+        if(!destination ||source.droppableId == destination.droppableId) return;
+
+        deletePreviousState(source.droppableId, draggableId);
+
+        const task = findItemById(draggableId, [...toDoTasks, ...inProgressTasks]);
+
+        updateNewState(destination.droppableId, task);
+
+    }
+
+    function deletePreviousState(sourceDroppableId, taskId){
+        switch (sourceDroppableId){
+            case "toDo":
+                setToDoTasks(removeItemById(taskId, toDoTasks));
+                break;
+            case "inProgress":
+                setInProgressTasks(removeItemById(taskId, inProgressTasks));
+                break;
+            case "peerReview":
+                setPeerReviewTasks(removeItemById(taskId, peerReviewTasks));
+                break;
+            case "done":
+                setDoneTasks(removeItemById(taskId, doneTasks));
+                break;
+        }
+    }
+
+    function updateNewState(destinationDroppableId, task){
+        let updatedTask;
+        switch(destinationDroppableId){
+            case "toDo":
+                updatedTask = {...task};
+                setToDoTasks([updatedTask, ...toDoTasks]);
+                break;
+            case "inProgress":
+                updatedTask = {...task};
+                setInProgressTasks([updatedTask, ...inProgressTasks]);
+                break;
+            case "peerReview":
+                updatedTask = {...task};
+                setPeerReviewTasks([updatedTask, ...peerReviewTasks]);
+                break;
+            case "done":
+                updatedTask = {...task};
+                setDoneTasks([updatedTask, ...doneTasks]);
+                break;
+        }
+    }
+    function findItemById(id, array){
+        return array.find((item) => item.id == id);
+    }
+
+    function removeItemById(id, array){
+        return array.filter((item) => item.id != id);
+    }
+
 
   return (
-    <div className='home'>
-        {/* <h1>{activeCard}</h1> */}
-        <div className="toDo">
-            <h4>To Do</h4>
-            {taskArr.map((item, index) => (
-                <TaskDetail key={index} title={item.title} description={item.description} index={index} setActiveCard={setActiveCard}/>
-            ))}
-            {/* <Column arr ={taskArr} /> */}
+    <DragDropContext onDragEnd={handleDragEnd} >
+
+        <div className='homeContainer'>
+
+            <Column title={"ToDo"} tasks={toDoTasks} id={"toDo"} />
+            <Column title={"In Progress"} tasks={inProgressTasks} id={"inProgress"} />
+            <Column title={"Peer Review"} tasks={peerReviewTasks} id={"peerReview"} />
+            <Column title={"Done"} tasks={doneTasks} id={"done"} />
         </div>
-        <div className="progress">
-            <h4>In Progress</h4>
-        </div>
-        <div className="review">
-            <h4>Peer Review</h4>
-        </div>
-        <div className="done">
-            <h4>Done</h4>
-        </div>
-    </div>
+
+    </DragDropContext>
   )
 }
 
