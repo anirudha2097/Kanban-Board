@@ -15,8 +15,9 @@ const Column = ({title, tasks, id}) => {
                 <div
                  ref={provided.innerRef}
                  {...provided.droppableProps}
-                 isDraggingOver={snapshot.isDraggingOver}
+                 isdraggingover={snapshot.isDraggingOver}
                 >
+                    
                     {tasks.map((item, index) => (
                         <Task key={index} index={index} title={item.title} description={item.description} />
                     ))}
