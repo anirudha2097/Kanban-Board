@@ -12,7 +12,7 @@ const Task = ({title, description, index}) => {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 ref={provided.innerRef}
-                isDragging={snapshot.isDragging}
+                isdragging={snapshot.isDragging}
             >
                 <div className='task' >
                     <h4>{title}</h4>
